@@ -1,0 +1,23 @@
+{
+  "name": "complete-intro-to-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liuzhengyang92/complete-intro-to-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liuzhengyang92/complete-intro-to-react/issues"
+  },
+  "homepage": "https://github.com/Liuzhengyang92/complete-intro-to-react#readme",
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
