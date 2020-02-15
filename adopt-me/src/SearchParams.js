@@ -6,13 +6,13 @@ import useDropdown from "./useDropdown";
 const SearchParams = () => {
   const [location, setLoation] = useState("Seattle, WA");
   const [breeds, setBreeds] = useState([]);
+  const [pets, setPets] = useState([]);
   const [animal, AnimalDropdown, setAnimal] = useDropdown(
     "Animal",
     "dog",
     ANIMALS
   );
   const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
-  const [pets, setPets] = useState([]);
 
   async function requestPets() {
     const { animals } = await pet.animals({
