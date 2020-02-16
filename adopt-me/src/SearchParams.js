@@ -1,22 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
-import Results from "./Results";
 import useDropdown from "./useDropdown";
+import Results from "./Results";
 import ThemeContext from "./ThemeContext";
-import Modal from "./Modal";
+import "regenerator-runtime";
 
 const SearchParams = () => {
+  const [theme, setTheme] = useContext(ThemeContext);
   const [location, setLoation] = useState("Seattle, WA");
   const [breeds, setBreeds] = useState([]);
-  const [animal, AnimalDropdown, setAnimal] = useDropdown(
-    "Animal",
-    "dog",
-    ANIMALS
-  );
-  const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
   const [pets, setPets] = useState([]);
-  const [theme, setTheme] = useContext(ThemeContext);
-  const [modal, setModal] = useState(false);
+  const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
+  const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
 
   async function requestPets() {
     const { animals } = await pet.animals({
@@ -34,15 +29,11 @@ const SearchParams = () => {
     setBreeds([]);
     setBreed("");
 
-    pet.breeds(animal).then(
-      ({ breeds }) => {
-        const breedStrings = breeds.map(({ name }) => name);
-        setBreeds(breedStrings);
-      }
-      // error => console.error
-    );
-  }, [animal, setBreed, setBreeds]); //if given the empty array, the useEffect will only
-  //run once. It will never run again.
+    pet.breeds(animal).then(({ breeds }) => {
+      const breedStrings = breeds.map(({ name }) => name);
+      setBreeds(breedStrings);
+    }, console.error);
+  }, [animal, setBreed]);
 
   return (
     <div className="search-params">
@@ -79,32 +70,6 @@ const SearchParams = () => {
         </label>
         <button style={{ backgroundColor: theme }}>Submit</button>
       </form>
-      <button
-        onClick={e => {
-          e.preventDefault();
-          setModal(!modal);
-        }}
-      >
-        Modal
-      </button>
-      {modal ? (
-        <Modal>
-          <div>
-            <h1>Would you like to adopt {name}?</h1>
-            <div className="buttons">
-              <button>Yes</button>
-              <button
-                onClick={e => {
-                  e.preventDefault();
-                  setModal(!modal);
-                }}
-              >
-                No, I am a Monster!{" "}
-              </button>
-            </div>
-          </div>
-        </Modal>
-      ) : null}
       <Results pets={pets} />
     </div>
   );

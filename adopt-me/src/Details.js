@@ -7,13 +7,6 @@ import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
 
 class Details extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     loading: true
-  //   };
-  // }
   state = { loading: true, showModal: false };
 
   componentDidMount() {
@@ -70,7 +63,9 @@ class Details extends React.Component {
                 <h1>Would you like to adopt {name}?</h1>
                 <div className="buttons">
                   <button onClick={this.adopt}>Yes</button>
-                  <button onClick={this.adopt}>No, I am a Monster! </button>
+                  <button onClick={this.toggleModal}>
+                    No, I am a Monster!{" "}
+                  </button>
                 </div>
               </div>
             </Modal>
